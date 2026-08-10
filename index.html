@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rohan Vimal — Propulsion &amp; Technology Leadership</title>
+<meta name="description" content="Rohan Vimal — Vice President of Technology at Abyom SpaceTech. Liquid rocket propulsion, engine control systems, and technical programme leadership.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#080b10; --panel:#0f141c; --panel2:#141b25; --line:#212b38;
+  --ink:#e9eef5; --mut:#93a1b0; --acc:#5aa9ff; --emb:#ff7a45;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --onacc:#04101d;
+  --svgvoid:#0c121a; --svgbox:#111a26;
+  --w1:#8fa3ba; --w2:#6b7f99; --w3:#41506a;
+  --lox:#5aa9ff; --fuel:#7ee0c0;
+}
+/* Light theme is a checkbox, not a script. Everything on this page that moves is
+   driven by :checked so it still works where JavaScript never runs — an iOS document
+   preview, a locked-down corporate viewer, a reader with scripting off. */
+#lightmode:checked ~ .page {
+  --bg:#ffffff; --panel:#f6f8fb; --panel2:#eef2f7; --line:#dde4ec;
+  --ink:#0e141c; --mut:#5b6570; --acc:#12395c; --emb:#c2410c; --onacc:#ffffff;
+  --svgvoid:#e9eef5; --svgbox:#ffffff;
+  --w1:#5a6b82; --w2:#44536a; --w3:#2f3a4b;
+  --lox:#1d6fc4; --fuel:#12876a;
+}
+html:has(#lightmode:checked) body { background:#ffffff; }
+/* colour AND background must both be declared here, not on body: the light-theme
+   variables are overridden on .page, and body is its parent — a var() on body
+   resolves against :root (the dark palette) and every element that merely
+   inherits would keep dark-theme text on a light background. */
+.page { background:var(--bg); color:var(--ink); min-height:100vh; }
+.sr { position:absolute; width:1px; height:1px; margin:-1px; padding:0;
+      overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+a { color:var(--acc); text-decoration:none; }
+.wrap { max-width:1120px; margin:0 auto; padding:0 24px; }
+h1,h2,h3,h4 { margin:0; line-height:1.18; letter-spacing:-.02em; font-weight:600; }
+p { margin:0 0 12px; }
+
+.conf-bar { background:var(--emb); color:#1a0d06; font-weight:600; font-size:13px;
+  text-align:center; padding:9px 16px; letter-spacing:.01em; }
+
+/* nav */
+nav { position:sticky; top:0; z-index:50; backdrop-filter:blur(14px);
+  background:var(--bg);
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  border-bottom:1px solid var(--line); }
+.nav { display:flex; align-items:center; justify-content:space-between; height:60px; }
+.brand { font-weight:600; letter-spacing:-.02em; font-size:16px; }
+.brand span { color:var(--mut); font-weight:400; }
+.links { display:flex; gap:22px; align-items:center; }
+.links a { color:var(--mut); font-size:14px; }
+.links a:hover, .links a.active { color:var(--ink); }
+.tgl { display:inline-flex; align-items:center; justify-content:center; background:none;
+  border:1px solid var(--line); color:var(--mut); border-radius:999px; width:34px; height:34px;
+  cursor:pointer; font-size:14px; user-select:none; -webkit-user-select:none; }
+.tgl:hover { color:var(--ink); border-color:var(--acc); }
+@media(max-width:820px) { .links a { display:none; } }
+
+/* hero */
+.hero { padding:76px 0 40px; position:relative; overflow:hidden; }
+.hero::before { content:""; position:absolute; inset:-40% 40% 40% -10%;
+  background:radial-gradient(closest-side, color-mix(in srgb,var(--acc) 18%, transparent), transparent);
+  pointer-events:none; }
+.eyebrow { font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--acc); margin-bottom:16px; }
+.hero h1 { font-size:clamp(38px,6.2vw,68px); letter-spacing:-.035em; margin-bottom:14px; }
+.hero .role { font-size:clamp(17px,2.2vw,21px); color:var(--ink); font-weight:500; margin-bottom:14px; }
+.hero .role em { color:var(--acc); font-style:normal; }
+.hero .lede { font-size:17px; color:var(--mut); max-width:62ch; margin-bottom:26px; }
+.btns { display:flex; gap:12px; flex-wrap:wrap; }
+.btn { display:inline-block; padding:11px 20px; border-radius:9px; font-size:14.5px; font-weight:500;
+  background:var(--acc); color:var(--onacc); border:1px solid var(--acc); }
+.btn.ghost { background:transparent; color:var(--ink); border-color:var(--line); }
+.btn:hover { filter:brightness(1.1); }
+.btn.ghost:hover { border-color:var(--acc); color:var(--acc); }
+
+/* metrics */
+.metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line);
+  border:1px solid var(--line); border-radius:14px; overflow:hidden; margin:44px 0 0; }
+.metric { background:var(--panel); padding:22px 20px; }
+.mv { font-size:34px; font-weight:600; letter-spacing:-.03em; color:var(--acc); }
+.suf { font-size:20px; }
+.ml { font-size:13px; color:var(--mut); line-height:1.45; margin-top:4px; }
+@media(max-width:820px) { .metrics { grid-template-columns:repeat(2,1fr); } }
+
+/* sections */
+section { padding:64px 0; border-top:1px solid var(--line); }
+section:first-of-type { border-top:none; }
+.shead { display:flex; align-items:baseline; gap:14px; margin-bottom:8px; }
+.snum { font-family:var(--mono); font-size:12px; color:var(--acc); letter-spacing:.1em; }
+.shead h2 { font-size:clamp(24px,3.4vw,34px); letter-spacing:-.03em; }
+.sdesc { color:var(--mut); max-width:64ch; margin-bottom:30px; }
+
+/* pillars */
+.pills { display:grid; grid-template-columns:repeat(auto-fit,minmax(238px,1fr)); gap:16px; }
+.pill { background:var(--panel); border:1px solid var(--line); border-radius:13px; padding:20px; }
+.pill h4 { font-size:15px; margin-bottom:7px; color:var(--acc); }
+.pill p { font-size:14px; color:var(--mut); margin:0; }
+
+/* filters + cards */
+.chips { display:flex; gap:9px; flex-wrap:wrap; margin-bottom:22px; }
+.chip { display:inline-block; background:transparent; border:1px solid var(--line);
+  color:var(--mut); padding:7px 15px; border-radius:999px; font-size:13.5px; cursor:pointer;
+  font-family:inherit; transition:.15s; user-select:none; -webkit-user-select:none; }
+.chip:hover { color:var(--ink); border-color:var(--acc); }
+#f-all:checked ~ .chips label[for="f-all"],
+#f-prop:checked ~ .chips label[for="f-prop"],
+#f-avio:checked ~ .chips label[for="f-avio"],
+#f-se:checked ~ .chips label[for="f-se"],
+#f-comm:checked ~ .chips label[for="f-comm"] { background:var(--acc); border-color:var(--acc); color:var(--onacc); font-weight:500; }
+#f-prop:checked ~ .cards .card:not([data-caps~="prop"]),
+#f-avio:checked ~ .cards .card:not([data-caps~="avio"]),
+#f-se:checked ~ .cards .card:not([data-caps~="se"]),
+#f-comm:checked ~ .cards .card:not([data-caps~="comm"]) { display:none; }
+
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:16px; }
+.card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:22px;
+  transition:.22s; }
+.card:hover, .card:focus-visible { border-color:var(--acc); transform:translateY(-2px); outline:none; }
+
+.card-h { margin-bottom:11px; }
+.card h3 { font-size:18px; margin-bottom:3px; }
+.card .sub { font-size:13px; color:var(--acc); }
+.role-badge { display:inline-block; font-size:10.5px; font-family:var(--mono); color:var(--mut);
+  border:1px solid var(--line); padding:3px 9px; border-radius:6px; margin-bottom:9px;
+  letter-spacing:.06em; text-transform:uppercase; }
+.summ { font-size:14.5px; color:var(--mut); }
+.detail { background:var(--panel2); border-left:2px solid var(--emb); border-radius:0 9px 9px 0;
+  padding:13px 15px; margin:12px 0; }
+.dl { font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--mut); margin-bottom:7px; }
+.conf { color:var(--emb); }
+.detail p { font-size:13.5px; color:var(--mut); margin:0; }
+.tags { display:flex; gap:7px; flex-wrap:wrap; margin-top:13px; }
+.tag { font-size:11.5px; color:var(--mut); background:var(--panel2); border:1px solid var(--line);
+  padding:3px 9px; border-radius:5px; }
+
+/* schematic */
+.schem { display:grid; grid-template-columns:1.55fr 1fr; gap:26px; align-items:center; }
+@media(max-width:900px) { .schem { grid-template-columns:1fr; } }
+.engine-wrap { background:var(--panel); border:1px solid var(--line); border-radius:14px;
+  padding:10px; }
+.engine-inner { position:relative; line-height:0; }
+.engine { width:100%; height:auto; display:block; }
+.hit { position:absolute; cursor:pointer; border-radius:8px; }
+.hit:hover { background:rgba(90,169,255,.10); }
+.sr:focus-visible + .page .hit, .hit:focus { outline:2px solid var(--acc); }
+.engine .lbl { fill:var(--mut); font-size:13px; font-family:var(--mono); letter-spacing:.08em; }
+.engine .end { text-anchor:end; }
+.engine .mid, .engine .pin { text-anchor:middle; fill:var(--mut); font-size:12px;
+  font-family:var(--mono); letter-spacing:.09em; }
+.engine .sm { font-size:10.5px; }
+.engine .void { fill:var(--svgvoid); }
+.engine .box { fill:var(--svgbox); }
+.engine #wall .w1 { stop-color:var(--w1); }
+.engine #wall .w2 { stop-color:var(--w2); }
+.engine #wall .w3 { stop-color:var(--w3); }
+.engine .cool { stroke:var(--acc); }
+.engine .dot { fill:var(--acc); }
+.engine .jacket { stroke:var(--acc); opacity:.55; }
+.engine .loxline { stroke:var(--lox); }
+.engine .fuelline { stroke:var(--fuel); }
+.engine .halo { fill:var(--acc); opacity:0; transition:.2s; }
+#r-hs-inj:checked ~ .schem .engine #hs-inj .halo { opacity:.17; }
+#r-hs-inj:checked ~ .schem .engine #hs-inj .pin { fill:var(--ink); }
+#r-hs-inj:checked ~ .schem #i-hs-inj { display:block; }
+#r-hs-ign:checked ~ .schem .engine #hs-ign .halo { opacity:.17; }
+#r-hs-ign:checked ~ .schem .engine #hs-ign .pin { fill:var(--ink); }
+#r-hs-ign:checked ~ .schem #i-hs-ign { display:block; }
+#r-hs-cham:checked ~ .schem .engine #hs-cham .halo { opacity:.17; }
+#r-hs-cham:checked ~ .schem .engine #hs-cham .pin { fill:var(--ink); }
+#r-hs-cham:checked ~ .schem #i-hs-cham { display:block; }
+#r-hs-noz:checked ~ .schem .engine #hs-noz .halo { opacity:.17; }
+#r-hs-noz:checked ~ .schem .engine #hs-noz .pin { fill:var(--ink); }
+#r-hs-noz:checked ~ .schem #i-hs-noz { display:block; }
+#r-hs-ecs:checked ~ .schem .engine #hs-ecs .halo { opacity:.17; }
+#r-hs-ecs:checked ~ .schem .engine #hs-ecs .pin { fill:var(--ink); }
+#r-hs-ecs:checked ~ .schem #i-hs-ecs { display:block; }
+.hsbox { background:var(--panel); border:1px solid var(--line); border-left:2px solid var(--acc);
+  border-radius:0 13px 13px 0; padding:20px; min-height:150px; }
+.hsbox h4 { font-size:17px; margin-bottom:9px; }
+.hsbox p { color:var(--mut); font-size:14.5px; margin:0; }
+.hsitem { display:none; }
+.hshint { font-family:var(--mono); font-size:11px; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--acc); margin-bottom:10px; }
+
+/* timeline */
+.tline { list-style:none; padding:0; margin:0; border-left:1px solid var(--line); }
+.tline li { display:flex; gap:20px; padding:0 0 26px 24px; position:relative; }
+.tline li::before { content:""; position:absolute; left:-5px; top:8px; width:9px; height:9px;
+  border-radius:50%; background:var(--acc); }
+.tline .yr { font-family:var(--mono); font-size:13px; color:var(--acc); min-width:44px; padding-top:2px; }
+.tline b { font-weight:600; font-size:15.5px; }
+.tline p { font-size:14px; color:var(--mut); margin:3px 0 0; }
+
+/* credentials */
+.creds { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:820px) { .creds { grid-template-columns:1fr; } }
+.cbox { background:var(--panel); border:1px solid var(--line); border-radius:13px; padding:22px; }
+.cbox h4 { font-size:13px; font-family:var(--mono); letter-spacing:.12em; text-transform:uppercase;
+  color:var(--acc); margin-bottom:13px; }
+.cbox ul { margin:0; padding-left:17px; }
+.cbox li { font-size:14px; color:var(--mut); margin-bottom:8px; }
+.cbox li b { color:var(--ink); font-weight:600; }
+
+/* contact */
+.contact { text-align:center; padding:70px 0 40px; }
+.contact h2 { font-size:clamp(26px,4vw,40px); margin-bottom:14px; letter-spacing:-.03em; }
+.contact p { color:var(--mut); max-width:52ch; margin:0 auto 26px; }
+footer { border-top:1px solid var(--line); padding:22px 0; color:var(--mut); font-size:13px;
+  display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.reveal { opacity:0; transform:translateY(16px); transition:.6s cubic-bezier(.2,.7,.3,1); }
+.reveal.in { opacity:1; transform:none; }
+@media print { nav,.tgl,.chips { display:none; } body { background:#fff; color:#000; } }
+</style></head>
+<body>
+<input type="checkbox" id="lightmode" class="sr" aria-label="Use light theme">
+<div class="page">
+
+<nav><div class="wrap nav">
+  <div class="brand">Rohan Vimal <span>· VP of Technology</span></div>
+  <div class="links">
+    <a href="#work">Work</a><a href="#engine">The engine</a><a href="#path">Path</a>
+    <a href="#credentials">Credentials</a><a href="#contact">Contact</a>
+    <label class="tgl" for="lightmode" title="Light / dark">◐</label>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Liquid rocket propulsion · Engine control systems · UAV design · Gas turbines</div>
+  <h1>I build rocket engines<br>and the systems that prove they work.</h1>
+  <div class="role"><em>Vice President of Technology</em> · Abyom SpaceTech and Defence</div>
+  <p class="lede">I am a propulsion engineer who learned to run a technology organisation without ever stopping being a propulsion engineer. I still size the injector, still write the control software, still stand at the test stand. What I have added is the ability to say, with evidence, which claims a programme can defend and which it cannot yet — and to put that distinction in front of a board, an investor or a regulator without flinching. India is going to need reusable launch capability that is genuinely indigenous. I intend to be one of the people who build it.</p>
+  <div class="btns">
+    <a class="btn" href="mailto:rohan08.v@gmail.com">Get in touch</a>
+    <a class="btn ghost" href="https://www.linkedin.com/in/rohan-vimal" target="_blank" rel="noopener">LinkedIn</a>
+    
+  </div>
+  <div class="metrics"><div class="metric"><div class="mv"><span class="count" data-to="250">250</span><span class="suf">+</span></div><div class="ml">hot-fire tests across two demonstrator engines</div></div><div class="metric"><div class="mv"><span class="count" data-to="1">1</span><span class="suf">st</span></div><div class="ml">privately developed pintle injector in India</div></div><div class="metric"><div class="mv"><span class="count" data-to="843">843</span><span class="suf"></span></div><div class="ml">automated tests guarding the control system</div></div><div class="metric"><div class="mv"><span class="count" data-to="4">4</span><span class="suf"></span></div><div class="ml">development programmes running concurrently</div></div></div>
+</div></header>
+
+<main>
+<section id="approach"><div class="wrap">
+  <div class="shead"><span class="snum">01</span><h2>How I work</h2></div>
+  <p class="sdesc">Four things that describe the engineer more accurately than a job title does.</p>
+  <div class="pills"><div class="pill"><h4>Builder who leads</h4><p>I still write the control software, still size the injector, still stand at the test stand. The engineering process I put in place is one I have to work inside myself.</p></div><div class="pill"><h4>Whole-stack propulsion</h4><p>Injector, chamber, ignition — and the instrumentation and control chain that measures all three. Few propulsion engineers work across the sensing side as well as the hardware.</p></div><div class="pill"><h4>Technical and commercial</h4><p>The same person who derives the performance identity writes the ten-year model. That combination is rare, and it is exactly what a deep-technology board needs.</p></div><div class="pill"><h4>Evidence over assertion</h4><p>A standing rule across my programmes: every claim carries an evidence class, and an inferred value is measured before anyone treats it as fact.</p></div></div>
+</div></section>
+
+<section id="work"><div class="wrap">
+  <input type="radio" name="capfilter" id="f-all" class="sr" checked><input type="radio" name="capfilter" id="f-prop" class="sr"><input type="radio" name="capfilter" id="f-avio" class="sr"><input type="radio" name="capfilter" id="f-se" class="sr"><input type="radio" name="capfilter" id="f-comm" class="sr">
+  <div class="shead"><span class="snum">02</span><h2>Programmes</h2></div>
+  <p class="sdesc">Six bodies of work I have led or built. Filter by the capability you care about.</p>
+  <div class="chips"><label class="chip" for="f-all">Everything</label><label class="chip" for="f-prop">Propulsion</label><label class="chip" for="f-avio">Avionics &amp; Control</label><label class="chip" for="f-se">Systems Engineering</label><label class="chip" for="f-comm">Commercial</label></div>
+  <div class="cards" id="cards">
+    <article class="card" data-caps="prop" tabindex="0">
+      <div class="card-h">
+        <div class="role-badge">Designed and tested</div>
+        <h3>Pintle Injector</h3><div class="sub">India's first privately developed pintle injection mechanism</div>
+      </div>
+      <p class="summ">A pintle meters both propellants with one moving element, which is what makes an engine deep-throttleable and restartable — the two properties a reusable booster cannot do without. Abyom's first pintle was designed here, taken through cold flow and spray characterisation to hot fire, and is now the injector architecture for the whole engine family.</p>
+      
+      <div class="tags"><span class="tag">Injector design</span><span class="tag">Cold flow</span><span class="tag">Spray characterisation</span><span class="tag">Hot fire</span><span class="tag">Throttling</span></div>
+    </article>
+    <article class="card" data-caps="avio se" tabindex="0">
+      <div class="card-h">
+        <div class="role-badge">Architected and built</div>
+        <h3>Engine Control System</h3><div class="sub">Hardware and software for engine test and control</div>
+      </div>
+      <p class="summ">Every number an engine programme produces comes through its control and acquisition system, so that system decides whether the results can be trusted. This one was built from nothing: a headless acquisition core, operator screens for sequencing and monitoring, read-only observer access, live computed performance channels, and a report generated automatically at the end of every test.</p>
+      
+      <div class="tags"><span class="tag">Real-time DAQ</span><span class="tag">Safety interlocks</span><span class="tag">Abort logic</span><span class="tag">Test automation</span><span class="tag">Python/PyQt</span></div>
+    </article>
+    <article class="card" data-caps="prop se" tabindex="0">
+      <div class="card-h">
+        <div class="role-badge">Design point and sizing</div>
+        <h3>10 kN Reusable Cryogenic Engine</h3><div class="sub">Pressure-fed LNG/LOX, regeneratively cooled, throttleable, restartable</div>
+      </div>
+      <p class="summ">The proof-of-concept engine for the reusable roadmap: fully cryogenic methane and oxygen, pintle-injected, torch-ignited, regeneratively cooled, throttleable, and designed to restart in flight. Design point, sizing and cooling architecture set here, with a generated design workbook and a theory manual so every number carries its derivation, validity range and error band.</p>
+      
+      <div class="tags"><span class="tag">Cryogenic propulsion</span><span class="tag">Throttleable</span><span class="tag">Regenerative cooling</span><span class="tag">Performance sizing</span><span class="tag">Additive manufacturing</span></div>
+    </article>
+    <article class="card" data-caps="prop avio" tabindex="0">
+      <div class="card-h">
+        <div class="role-badge">Requirements and down-select</div>
+        <h3>Torch Ignition System</h3><div class="sub">Re-ignitable spark torch igniter and its control chain</div>
+      </div>
+      <p class="summ">Reusability means relighting. The torch igniter runs on the same propellants as the engine and has to deliver a stable light repeatedly, on command, with the control chain defaulting to safe on any failure. Two competing architectures were designed in full and taken to a head-to-head down-select.</p>
+      
+      <div class="tags"><span class="tag">Ignition</span><span class="tag">Electrical design</span><span class="tag">FMEA</span><span class="tag">Test &amp; validation</span><span class="tag">Due diligence</span></div>
+    </article>
+    <article class="card" data-caps="se" tabindex="0">
+      <div class="card-h">
+        <div class="role-badge">Requirements and analysis</div>
+        <h3>Reusable Vehicle Development</h3><div class="sub">Hop demonstrators and the launch-vehicle roadmap</div>
+      </div>
+      <p class="summ">The engines exist to fly something. Concept of operations and system requirements baselined for the low-altitude hop demonstrator, with the systems engineering management plan, master schedule, work breakdown and responsibility assignment behind them, plus guidance-navigation-control architecture studies and an autonomous landing-legs concept.</p>
+      
+      <div class="tags"><span class="tag">ConOps</span><span class="tag">Requirements</span><span class="tag">SEMP / WBS / RAM</span><span class="tag">GNC architecture</span></div>
+    </article>
+    <article class="card" data-caps="comm" tabindex="0">
+      <div class="card-h">
+        <div class="role-badge">Modelled and written</div>
+        <h3>Fundraising & Commercial Strategy</h3><div class="sub">The technical case, in the language investors read</div>
+      </div>
+      <p class="summ">A deep-tech raise is won or lost on whether the technical story and the financial story are the same story. Built the ten-year model, the scenario and valuation analysis, the due-diligence assessment and the investor answer set for an active $3M round, in both INR and USD — after helping close a ₹6 crore pre-seed.</p>
+      
+      <div class="tags"><span class="tag">Financial modelling</span><span class="tag">Valuation</span><span class="tag">Due diligence</span><span class="tag">Investor relations</span></div>
+    </article></div>
+</div></section>
+
+<section id="engine"><div class="wrap">
+  <input type="radio" name="hotspot" id="r-hs-inj" class="sr" checked><input type="radio" name="hotspot" id="r-hs-ign" class="sr"><input type="radio" name="hotspot" id="r-hs-cham" class="sr"><input type="radio" name="hotspot" id="r-hs-noz" class="sr"><input type="radio" name="hotspot" id="r-hs-ecs" class="sr">
+  <div class="shead"><span class="snum">03</span><h2>What I actually touch</h2></div>
+  <p class="sdesc">A liquid rocket engine, in section. Select a part to see what my involvement in
+  it has been. Architecture only — no programme figures.</p>
+  <div class="schem">
+    <div class="engine-wrap"><div class="engine-inner">
+<svg viewBox="0 0 900 360" class="engine" role="img"
+     aria-label="Section through a liquid rocket engine: injector, chamber, throat and nozzle">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop class="w1" offset="0%" stop-color="#8fa3ba"/><stop class="w2" offset="50%" stop-color="#6b7f99"/>
+      <stop class="w3" offset="100%" stop-color="#41506a"/>
+    </linearGradient>
+    <radialGradient id="burn" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#ffb373" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#ff7a45" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="plume" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffb373" stop-opacity=".7"/>
+      <stop offset="100%" stop-color="#ff7a45" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="regen" width="10" height="10" patternUnits="userSpaceOnUse">
+      <line class="cool" x1="5" y1="0" x2="5" y2="10" stroke="#5aa9ff" stroke-width="3" opacity=".55"/>
+    </pattern>
+  </defs>
+
+  <!-- plume -->
+  <path d="M828 62 L900 34 L900 306 L828 278 Z" fill="url(#plume)"/>
+
+  <!-- gas path: injector dome -> chamber -> convergent -> throat -> bell -->
+  <path id="gaspath" d="M200 118 Q178 170 200 222 L470 222 L545 186
+        Q660 250 828 278 L828 62 Q660 90 545 154 L470 118 Z"
+        class="void" fill="#0c121a" stroke="url(#wall)" stroke-width="7" stroke-linejoin="round"/>
+  <ellipse cx="360" cy="170" rx="140" ry="48" fill="url(#burn)"/>
+
+  <!-- regenerative cooling jacket on the chamber walls -->
+  <g opacity=".9">
+    <rect x="212" y="100" width="252" height="12" fill="url(#regen)"/>
+    <rect class="jacket" x="212" y="100" width="252" height="12" fill="none" stroke="#3f5a7d" stroke-width="1.2"/>
+    <rect x="212" y="228" width="252" height="12" fill="url(#regen)"/>
+    <rect class="jacket" x="212" y="228" width="252" height="12" fill="none" stroke="#3f5a7d" stroke-width="1.2"/>
+  </g>
+
+  <!-- propellant feed -->
+  <path class="loxline" d="M100 78 L168 78 L168 138 L198 138" fill="none" stroke="#5aa9ff"
+        stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="fuelline" d="M100 262 L168 262 L168 202 L198 202" fill="none" stroke="#7ee0c0"
+        stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="92" y="72" class="lbl end">LOX</text>
+  <text x="92" y="280" class="lbl end">FUEL</text>
+
+  <!-- pintle -->
+  <g id="hs-inj" class="hs" tabindex="0">
+    <circle cx="228" cy="170" r="46" class="halo"/>
+    <rect class="box" x="206" y="142" width="42" height="56" rx="5" fill="#111a26"
+          class="boxline" stroke="#5aa9ff" stroke-width="2.6"/>
+    <path class="cool" d="M250 170 L306 142 M250 170 L306 198 M250 170 L310 170" stroke="#5aa9ff"
+          stroke-width="1.8" opacity=".75"/>
+    <text x="238" y="288" class="pin">Pintle injector</text>
+  </g>
+
+  <!-- torch igniter -->
+  <g id="hs-ign" class="hs" tabindex="0">
+    <circle cx="316" cy="96" r="34" class="halo"/>
+    <path d="M316 66 L316 114" stroke="#ff7a45" stroke-width="5.5" stroke-linecap="round"/>
+    <circle class="box" cx="316" cy="56" r="11" fill="#111a26" stroke="#ff7a45" stroke-width="2.6"/>
+    <path d="M312 60 l4 -8 l0 7 l4 -7" fill="none" stroke="#ff7a45" stroke-width="2"/>
+    <text x="316" y="34" class="pin">Torch igniter</text>
+  </g>
+
+  <!-- chamber -->
+  <g id="hs-cham" class="hs" tabindex="0">
+    <circle cx="400" cy="170" r="52" class="halo"/>
+    <text x="424" y="288" class="pin">Regen chamber</text>
+  </g>
+
+  <!-- nozzle -->
+  <g id="hs-noz" class="hs" tabindex="0">
+    <circle cx="700" cy="170" r="56" class="halo"/>
+    <text x="700" y="288" class="pin">Nozzle</text>
+  </g>
+
+  <!-- control &amp; instrumentation -->
+  <g id="hs-ecs" class="hs" tabindex="0">
+    <path class="cool" d="M168 120 L360 306 M330 244 L390 306 M430 244 L470 306" stroke="#5aa9ff"
+          stroke-width="1.3" opacity=".55" stroke-dasharray="4 4"/>
+    <rect class="box" x="352" y="306" width="184" height="40" rx="8" fill="#111a26"
+          stroke="#5aa9ff" stroke-width="2"/>
+    <text x="444" y="331" class="mid">CONTROL &amp; DAQ</text>
+    <circle class="dot" cx="168" cy="118" r="6" fill="#5aa9ff"/><text x="196" y="112" class="mid sm">PT</text>
+    <circle class="dot" cx="330" cy="234" r="6" fill="#5aa9ff"/><text x="330" y="258" class="mid sm">Pc</text>
+    <circle class="dot" cx="430" cy="234" r="6" fill="#5aa9ff"/><text x="430" y="258" class="mid sm">TC</text>
+  </g>
+
+  <!-- centreline -->
+  <path d="M186 170 L884 170" stroke="#5b6570" stroke-width="1" stroke-dasharray="10 8" opacity=".5"/>
+</svg><label class="hit" for="r-hs-inj" title="Pintle injector" aria-label="Pintle injector" style="left:21.333%;top:35.556%;width:14.222%;height:23.333%"></label><label class="hit" for="r-hs-ign" title="Torch igniter" aria-label="Torch igniter" style="left:31.556%;top:11.111%;width:7.111%;height:23.333%"></label><label class="hit" for="r-hs-cham" title="Regeneratively cooled chamber" aria-label="Regeneratively cooled chamber" style="left:37.556%;top:33.333%;width:13.778%;height:27.778%"></label><label class="hit" for="r-hs-noz" title="Nozzle" aria-label="Nozzle" style="left:61.778%;top:18.333%;width:32.000%;height:58.889%"></label><label class="hit" for="r-hs-ecs" title="Control and instrumentation" aria-label="Control and instrumentation" style="left:38.667%;top:80.000%;width:21.333%;height:16.667%"></label></div></div>
+    <div class="hsbox">
+      <div class="hshint">Select a component</div>
+      <div class="hsitem" id="i-hs-inj"><h4>Pintle injector</h4><p>One moving element meters both propellants. This is what makes an engine deeply throttleable and restartable, and it is the piece I designed.</p></div><div class="hsitem" id="i-hs-ign"><h4>Torch igniter</h4><p>Runs on the same propellants as the engine so it can relight in flight, repeatedly, on command — the requirement reusability actually turns on.</p></div><div class="hsitem" id="i-hs-cham"><h4>Regeneratively cooled chamber</h4><p>Fuel is routed through the chamber wall before it is burned: the propellant cools the engine on its way in. Additively manufactured, bi-metallic.</p></div><div class="hsitem" id="i-hs-noz"><h4>Nozzle</h4><p>The throat chokes the flow and the bell turns pressure into thrust. Sized against the mission the vehicle has to fly, not against the number that looks best on a datasheet.</p></div><div class="hsitem" id="i-hs-ecs"><h4>Control and instrumentation</h4><p>Sequencing, interlocks, aborts and every channel of data the programme is judged on. Hardware and software, built in-house.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="path"><div class="wrap">
+  <div class="shead"><span class="snum">04</span><h2>The path here</h2></div>
+  <p class="sdesc">Engines first, hands on, before anything else.</p>
+  <ul class="tline"><li><span class="yr">2019</span><div><b>Air India Engineering Services</b><p>Engine overhaul, rig test and inspection — GE90, GEnx-1B, PW4056, CFM56.</p></div></li><li><span class="yr">2020</span><div><b>B.Tech, Aeronautical Engineering</b><p>Institute of Aeronautical Engineering, Hyderabad. Undergraduate research on supersonic dual-jet mixing.</p></div></li><li><span class="yr">2020</span><div><b>Ziegler Aerospace</b><p>Team Lead on Airbus and Boeing certification design projects; established the AS9100 Rev D quality route.</p></div></li><li><span class="yr">2020</span><div><b>Indian Army</b><p>R&amp;D specialist on two certified engagements — Searcher MkII UAV aerodynamics, and rotor blade tip performance.</p></div></li><li><span class="yr">2023</span><div><b>Abyom SpaceTech — Associate Propulsion Engineer</b><p>Designed India's first privately developed pintle injection mechanism.</p></div></li><li><span class="yr">2024</span><div><b>Abyom SpaceTech — VP, Technical Operations</b><p>Took charge of programme management and resource allocation across engine development.</p></div></li><li><span class="yr">2024</span><div><b>Abyom SpaceTech — VP of Technology</b><p>Now leading engine R&amp;D, avionics and control, systems engineering, quality and the technical investment case.</p></div></li><li><span class="yr">2026</span><div><b>BSE-II campaign complete</b><p>Proof-of-concept engine phase closed out. Cryogenic engine and throttling programmes now in build.</p></div></li></ul>
+</div></section>
+
+<section id="credentials"><div class="wrap">
+  <div class="shead"><span class="snum">05</span><h2>Credentials</h2></div>
+  <p class="sdesc">The formal record.</p>
+  <div class="creds">
+    <div class="cbox"><h4>Education &amp; affiliations</h4><ul>
+      <li><b>B.Tech, Aeronautical Engineering</b> — Institute of Aeronautical Engineering,
+      Hyderabad. CGPA 8.35/10, 2020.</li>
+      <li><b>Member</b> — AIAA · ASME · IEEE · SAE International</li>
+      <li><b>Languages</b> — English, Hindi, Malayalam, Telugu</li>
+    </ul></div>
+    <div class="cbox"><h4>Recognition</h4><ul><li><b>Top 15 worldwide</b> — SAE Aero Design Challenge 2020, Florida Air Museum, Lakeland, USA — Team Captain, IARE Astra</li><li><b>3rd — Best Technical Presentation &amp; 3rd — Best Design Report (of 67)</b> — SAE ISS Aero Design Challenge 2019, Chennai — Team Captain, IARE Lakshya</li><li><b>1st — Technical Paper Presentation</b> — SAE ISS Student Convention, National Round (Tier-3) 2019 — paper on turbine blade cooling</li></ul></div>
+  </div>
+</div></section>
+
+<section class="contact" id="contact"><div class="wrap">
+  <h2>Building something that needs to fly?</h2>
+  <p>Propulsion, test infrastructure, engine control and instrumentation, or the technical case
+  behind a deep-technology raise — happy to talk.</p>
+  <div class="btns" style="justify-content:center">
+    <a class="btn" href="mailto:rohan08.v@gmail.com">rohan08.v@gmail.com</a>
+    <a class="btn ghost" href="https://www.linkedin.com/in/rohan-vimal" target="_blank" rel="noopener">Connect on LinkedIn</a>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;width:100%;gap:12px;flex-wrap:wrap">
+  <span>© 2026 Rohan Vimal · Mumbai, India</span>
+  <span>Views are mine. No confidential programme data on this page.</span>
+</div></footer>
+</div>
+
+<script>
+/* Progressive enhancement only. Everything on this page — theme, capability
+   filter, engine hotspots — is driven by :checked in CSS and works with this
+   script absent. What follows adds motion, nothing more, and the page is fully
+   correct without it. Verified against an iOS document preview, which runs no
+   script at all. */
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // count-up: the markup already carries the final value, so this resets to zero
+  // and animates up. If it never runs, the correct number was there all along.
+  var seen = false;
+  function counts(){
+    if(seen || reduce) return;
+    var m = document.querySelector('.metrics');
+    if(!m || m.getBoundingClientRect().top > window.innerHeight) return;
+    seen = true;
+    var els = document.querySelectorAll('.count');
+    for(var i = 0; i < els.length; i++){
+      (function(el){
+        var to = parseInt(el.getAttribute('data-to'), 10), st = null, dur = 1100;
+        if(isNaN(to)) return;
+        el.textContent = '0';
+        function step(ts){
+          if(!st) st = ts;
+          var p = Math.min((ts - st) / dur, 1);
+          el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+          if(p < 1) requestAnimationFrame(step); else el.textContent = to;
+        }
+        requestAnimationFrame(step);
+      })(els[i]);
+    }
+  }
+
+  // reveal-on-scroll. The class is added here, never in the markup, so with no
+  // script every element is simply visible from the start.
+  if(!reduce){
+    var r = document.querySelectorAll('.pill,.card,.cbox,.tline li,.hsbox,.engine-wrap');
+    for(var j = 0; j < r.length; j++) r[j].classList.add('reveal');
+  }
+
+  var secs = document.querySelectorAll('section');
+  var navlinks = document.querySelectorAll('.links a');
+  function onScroll(){
+    counts();
+    var rev = document.querySelectorAll('.reveal');
+    for(var i = 0; i < rev.length; i++){
+      if(rev[i].getBoundingClientRect().top < window.innerHeight - 40) rev[i].classList.add('in');
+    }
+    var cur = '';
+    for(var k = 0; k < secs.length; k++){
+      if(secs[k].getBoundingClientRect().top <= 90) cur = secs[k].id;
+    }
+    for(var n = 0; n < navlinks.length; n++){
+      navlinks[n].classList.toggle('active', navlinks[n].getAttribute('href') === '#' + cur);
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  // Failsafe: .reveal starts at opacity 0, so if anything above throws before the
+  // scroll handler is doing its job, content would stay invisible. Two and a half
+  // seconds later, show everything regardless. A page that fails should fail visible.
+  setTimeout(function(){
+    var all = document.querySelectorAll('.reveal');
+    for(var i = 0; i < all.length; i++) all[i].classList.add('in');
+  }, 2500);
+})();
+</script>
+</body></html>
